@@ -57,13 +57,11 @@ public class userInfo extends register {
                 BufferedReader reader = new BufferedReader(tmp);
 
                 String str;
-                String newString;
 
                 StringBuilder buf = new StringBuilder();
 
                 while ((str = reader.readLine()) != null) {
-                    newString = (str + "\n");
-                    buf.append(newString);
+                    buf.append(str + "\n");
                 }
                 in.close();
                 regInfo.setText(buf.toString());

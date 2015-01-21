@@ -41,10 +41,15 @@ public class register extends ActionBarActivity
     {
         try
         {
+            String emailStr = ("Email: " + email.getText().toString().trim() + "\n");
+            String nameStr = ("Name: " + name.getText().toString().trim() + "\n");
+            String zipStr = ("Zip: " + zip.getText().toString().trim() + "\n");
+
             OutputStreamWriter out = new OutputStreamWriter(openFileOutput(STORETEXT, 0));
-            out.write("Email: " + email.getText().toString().trim());
-            out.write("Name: " + name.getText().toString().trim());
-            out.write("Zip: " + zip.getText().toString().trim());
+
+            out.write(emailStr);
+            out.write(nameStr);
+            out.write(zipStr);
             out.close();
 
             Toast.makeText(this, "Registration successful.", Toast.LENGTH_LONG).show();
