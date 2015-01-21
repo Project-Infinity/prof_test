@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.OutputStreamWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class register extends ActionBarActivity
 {
@@ -37,12 +39,19 @@ public class register extends ActionBarActivity
 
     public void regClicked(View v)
     {
-        String
-        if(passwordsMatch(password.toString(), password2.toString())) {
-            try {
-                String emailStr = ("Email: " + email.getText().toString().trim() + "\n");
-                String nameStr = ("Name: " + name.getText().toString().trim() + "\n");
-                String zipStr = ("Zip: " + zip.getText().toString().trim() + "\n");
+        String passVal = password.getText().toString();
+        String pass2Val = password2.getText().toString();
+        String emailVal = email.getText().toString();
+        String nameVal = name.getText().toString();
+        String zipVal = zip.getText().toString();
+
+        if(emailValidate(emailVal) && passwordsMatch(passVal, pass2Val) && nameValidate(nameVal) && zipValidate(zipVal))
+        {
+            try
+            {
+                String emailStr = ("Email: " + emailVal + "\n");
+                String nameStr = ("Name: " + nameVal + "\n");
+                String zipStr = ("Zip: " + zipVal + "\n");
 
                 OutputStreamWriter out = new OutputStreamWriter(openFileOutput(STORETEXT, 0));
 
@@ -54,7 +63,9 @@ public class register extends ActionBarActivity
                 Toast.makeText(this, "Registration successful.", Toast.LENGTH_LONG).show();
 
                 startActivity(new Intent(register.this, userInfo.class));
-            } catch (Throwable t) {
+            }
+            catch (Throwable t)
+            {
                 Toast.makeText(this, "Exception: " + t.toString(), Toast.LENGTH_LONG).show();
             }
         }
@@ -82,29 +93,57 @@ public class register extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
-/*    //input sanitation
+    /*//input sanitation
     public String sanitizeString(String input)
     {
 
-    }
+    }*/
 
     //email validation
-    public boolean isValidEmailAddress(String email)
+    public boolean emailValidate(String email)
     {
-
+        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        Pattern p = Pattern.compile(ePattern);
+        Matcher m = p.matcher(email);
+        if (!m.matches())
+        {
+            Toast.makeText(this, "Invalid Email", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     //zip validation
-    public boolean isValidZip(String zip)
+    public boolean zipValidate(String zip)
     {
-
+        char [] c = zip.toCharArray();
+        for(int i=0; i < zip.length(); i++)
+        {
+            if (!Character.isDigit(c[i]))
+            {
+                Toast.makeText(this, "Zip must contain only numbers.", Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }
+        return true;
     }
 
     //name validation
-    public boolean isValidName(String name)
+    public boolean nameValidate(String name)
     {
-
-    }*/
+        if(name.matches(".*\\d.*"))
+        {
+            Toast.makeText(this, "Name can not contain a number.", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 
     //password validation
     public boolean passwordsMatch(String pass1, String pass2)
