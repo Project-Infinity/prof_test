@@ -16,8 +16,8 @@ public class register extends ActionBarActivity
 
     private final static String STORETEXT = "reginfo.txt";
     private EditText email;
-    //private EditText password;
-    //private EditText password2;
+    private EditText password;
+    private EditText password2;
     private EditText name;
     private EditText zip;
 
@@ -29,34 +29,34 @@ public class register extends ActionBarActivity
 
         //initialize
         email = (EditText) findViewById(R.id.emailEntry);
-        //password = (EditText) findViewById(R.id.passwordEntry);
-        //password2 = (EditText) findViewById(R.id.password2Entry);
+        password = (EditText) findViewById(R.id.passwordEntry);
+        password2 = (EditText) findViewById(R.id.password2Entry);
         name = (EditText) findViewById(R.id.nameEntry);
         zip = (EditText) findViewById(R.id.zipEntry);
     }
 
     public void regClicked(View v)
     {
-        try
-        {
-            String emailStr = ("Email: " + email.getText().toString().trim() + "\n");
-            String nameStr = ("Name: " + name.getText().toString().trim() + "\n");
-            String zipStr = ("Zip: " + zip.getText().toString().trim() + "\n");
+        String
+        if(passwordsMatch(password.toString(), password2.toString())) {
+            try {
+                String emailStr = ("Email: " + email.getText().toString().trim() + "\n");
+                String nameStr = ("Name: " + name.getText().toString().trim() + "\n");
+                String zipStr = ("Zip: " + zip.getText().toString().trim() + "\n");
 
-            OutputStreamWriter out = new OutputStreamWriter(openFileOutput(STORETEXT, 0));
+                OutputStreamWriter out = new OutputStreamWriter(openFileOutput(STORETEXT, 0));
 
-            out.write(emailStr);
-            out.write(nameStr);
-            out.write(zipStr);
-            out.close();
+                out.write(emailStr);
+                out.write(nameStr);
+                out.write(zipStr);
+                out.close();
 
-            Toast.makeText(this, "Registration successful.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Registration successful.", Toast.LENGTH_LONG).show();
 
-            startActivity(new Intent(register.this, userInfo.class));
-        }
-        catch (Throwable t)
-        {
-            Toast.makeText(this, "Exception: "+t.toString(), Toast.LENGTH_LONG).show();
+                startActivity(new Intent(register.this, userInfo.class));
+            } catch (Throwable t) {
+                Toast.makeText(this, "Exception: " + t.toString(), Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -94,21 +94,30 @@ public class register extends ActionBarActivity
 
     }
 
-    //name validation
-    public boolean isValidName(String name)
-    {
-
-    }
-
-    //password validation
-    public boolean isValidZip(String zip)
-    {
-
-    }
-
     //zip validation
     public boolean isValidZip(String zip)
     {
 
+    }
+
+    //name validation
+    public boolean isValidName(String name)
+    {
+
     }*/
+
+    //password validation
+    public boolean passwordsMatch(String pass1, String pass2)
+    {
+        if (pass1.equals(pass2))
+        {
+            return true;
+        }
+        else
+        {
+            Toast.makeText(this, "Passwords must match.", Toast.LENGTH_LONG).show();
+            return false;
+        }
+    }
+
 }
