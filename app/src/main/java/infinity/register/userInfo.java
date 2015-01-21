@@ -1,7 +1,6 @@
 package infinity.register;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -57,11 +55,13 @@ public class userInfo extends register {
                 BufferedReader reader = new BufferedReader(tmp);
 
                 String str;
+                String newLine;
 
                 StringBuilder buf = new StringBuilder();
 
                 while ((str = reader.readLine()) != null) {
-                    buf.append(str + "\n");
+                    newLine = str + "\n";
+                    buf.append(newLine);
                 }
                 in.close();
                 regInfo.setText(buf.toString());

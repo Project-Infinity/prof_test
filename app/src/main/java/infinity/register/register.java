@@ -10,16 +10,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.OutputStreamWriter;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class register extends ActionBarActivity
 {
 
     private final static String STORETEXT = "reginfo.txt";
     private EditText email;
-    private EditText password;
-    private EditText password2;
+    //private EditText password;
+    //private EditText password2;
     private EditText name;
     private EditText zip;
 
@@ -31,8 +29,8 @@ public class register extends ActionBarActivity
 
         //initialize
         email = (EditText) findViewById(R.id.emailEntry);
-        password = (EditText) findViewById(R.id.passwordEntry);
-        password2 = (EditText) findViewById(R.id.password2Entry);
+        //password = (EditText) findViewById(R.id.passwordEntry);
+        //password2 = (EditText) findViewById(R.id.password2Entry);
         name = (EditText) findViewById(R.id.nameEntry);
         zip = (EditText) findViewById(R.id.zipEntry);
     }
